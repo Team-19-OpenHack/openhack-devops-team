@@ -7,17 +7,10 @@ name: userProfileNodeJSUnitTest
 on:
   push:
     branches: [ master ]
-    paths:
-    - 'apis/userprofile/tests/**'
-    - 'apis/userprofile/tests/healthcheck/**'
-    - 'apis/userprofile/tests/user/**'
     
   pull_request:
     branches: [ master ]
-    paths:
-    - 'apis/userprofile/tests/**'
-    - 'apis/userprofile/tests/healthcheck/**'
-    - 'apis/userprofile/tests/user/**'
+
     
 jobs:
   build:
