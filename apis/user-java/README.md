@@ -13,6 +13,8 @@ You can view the api documentation in swagger-ui by pointing to
 
 Change default port value in `src/main/resources/application.properties`
 
+## DAN WAS HERE
+
 ## Build the project
 
 1. Install Maven [https://maven.apache.org/install.html](https://maven.apache.org/install.html) and setup the environment path accordingly
