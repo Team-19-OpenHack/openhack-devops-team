@@ -1,6 +1,5 @@
 # Create a workflow to test the UserProfile API using NPM
 # Because it's Javascript, there's really no need to build this project
-# For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-maven
 
 name: userProfileNodeJSUnitTest
 
@@ -28,7 +27,6 @@ jobs:
         with:
         node-version: ${{ matrix.node-version }}
       - run: npm install
-      - run: npm run build --if-present
       - run: npm test
       
       env:
