@@ -6,11 +6,11 @@ name: Java CI with Maven
 on:
   push:
     branches: [ master ]
-    paths: 'apis/user-java/**'
+    paths: ['apis/user-java/**']
     
   pull_request:
     branches: [ master ]
-    paths: 'apis/user-java/**'
+    paths: ['apis/user-java/**']
 
 jobs:
   build:
@@ -24,4 +24,4 @@ jobs:
       with:
         java-version: 1.8
     - name: Build with Maven
-      run: mvn -B package --file pom.xml
+      run: mvn -B package --file apis/user-java/pom.xml
