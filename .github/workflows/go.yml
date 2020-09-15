@@ -3,10 +3,8 @@ name: Go
 on:
   push:
     branches: [ master ]
-    paths: 'apis/trips/**'
   pull_request:
     branches: [ master ]
-    paths: 'apis/trips/**'
 
 jobs:
 
