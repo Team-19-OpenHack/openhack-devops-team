@@ -1,4 +1,4 @@
-name: Go
+name: Trips API Unit Test
 
 on:
   push:
@@ -15,7 +15,7 @@ defaults:
 jobs:
 
   build:
-    name: Build
+    name: Build Go Environment
     runs-on: ubuntu-latest
     steps:
 
