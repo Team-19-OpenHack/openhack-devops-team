@@ -1,7 +1,5 @@
 name: .NET Core
-defaults:
-  run:    
-    working-directory: apis/poi/
+
 on:
   push:
     branches: [ master ]
@@ -10,6 +8,11 @@ on:
   pull_request:
     branches: [ master ]
     paths: 'apis/poi/**'
+
+defaults:
+  run:    
+    working-directory: apis/poi/
+
 jobs:
   build:
 
