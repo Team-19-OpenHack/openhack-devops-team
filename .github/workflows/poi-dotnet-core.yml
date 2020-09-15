@@ -1,5 +1,7 @@
 name: .NET Core
-
+defaults:
+  run:    
+    working-directory: apis/poi/
 on:
   push:
     branches: [ master ]
