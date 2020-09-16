@@ -82,8 +82,8 @@ jobs:
        password: ${{ secrets.REGISTRY_PASSWORD }}
     
     - run: |
-        docker build . -t openhackbxb3pxs9acr.azurecr.io/devopsoh/api-user-java:${{ github.sha }}
-        docker push openhackbxb3pxs9acr.azurecr.io/devopsoh/api-user-java:${{ github.sha }}
+        docker build . -t openhackbxb3pxs9acr.azurecr.io/devopsoh/api-user-java:latest -t openhackbxb3pxs9acr.azurecr.io/devopsoh/api-user-java:${{ github.run_id }}
+        docker push openhackbxb3pxs9acr.azurecr.io/devopsoh/api-user-java
         
   job3:
     needs: job2
@@ -111,7 +111,7 @@ jobs:
       with:
         app-name: 'openhackbxb3pxs9userjava'
         slot-name: 'staging'
-        images: 'openhackbxb3pxs9acr.azurecr.io/devopsoh/api-user-java:${{ github.sha }}'
+        images: 'openhackbxb3pxs9acr.azurecr.io/devopsoh/api-user-java:latest'
     
     - name: Azure logout
       run: |
