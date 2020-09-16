@@ -20,7 +20,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     name: Build Maven Project
-    
+
     steps:
     - uses: actions/checkout@v2
     - uses: actions/cache@v1
@@ -40,6 +40,16 @@ jobs:
     
     - name: Build with Maven
       run: mvn -B package --file pom.xml
+      if: ${{ success() }}
+      uses: alialaa/issue-action@v1
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        title: "API - User-Java - Failed Maven Build"
+        body: "The API failed to build"
+        assignees: | 
+          selleny
+          MSFTDELANEY
+          JSandersMSFT
 
     - name: Run Tests
       run: mvn test   
