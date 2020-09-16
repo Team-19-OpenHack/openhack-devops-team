@@ -20,7 +20,7 @@ env:
   CI: true
 
 jobs:
-  build:
+  build_and_test:
     name: Build Unit Tests
     runs-on: ubuntu-latest
     steps:
@@ -35,3 +35,8 @@ jobs:
         npm install
         npm run build --if-present
         npm run test --if-present
+    - name: Archive results
+      uses: actions/upload-artifact@v2
+      with:
+        name: code-coverage-report
+        path: reports/user-profile.xml
