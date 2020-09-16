@@ -1,7 +1,4 @@
-# This workflow will build and push a node.js application to an Azure Web App when a release is created.
-# For more information on GitHub Actions for Azure, refer to https://github.com/Azure/Actions
-# For more samples to get started with GitHub Action workflows to deploy to Azure, refer to https://github.com/Azure/actions-workflow-samples
-name: Run User Profile Unit Tests
+name: User Profile CI-CD
 
 on:
   push:
@@ -18,8 +15,8 @@ env:
   CI: true
 
 jobs:
-  build_and_test:
-    name: Build Unit Tests
+  job1:
+    name: CI - Build and Test
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -33,3 +30,57 @@ jobs:
         npm install
         npm run build --if-present
         npm run test --if-present
+
+  job2:
+    needs: job1
+    if: github.ref == 'refs/heads/master'
+    
+    runs-on: ubuntu-latest
+    name: CD - Deploy to ACR
+
+    steps:
+    - name: 'Checkout GitHub Action'
+      uses: actions/checkout@v2
+      
+    - name: 'Login to ACR'
+      uses: azure/docker-login@v1
+      with:
+       login-server: openhackbxb3pxs9acr.azurecr.io
+       username: ${{ secrets.REGISTRY_USERNAME }}
+       password: ${{ secrets.REGISTRY_PASSWORD }}
+    
+    - run: |
+        docker build . -t openhackbxb3pxs9acr.azurecr.io/devopsoh/api-userprofile:${{ github.sha }}
+        docker push openhackbxb3pxs9acr.azurecr.io/devopsoh/api-userprofile:${{ github.sha }}
+
+  job3:
+    needs: job2
+    if: github.ref == 'refs/heads/master'
+    
+    runs-on: ubuntu-latest
+    name: CD - Deploy to App Service Slot (Staging)
+    
+    steps:
+    - name: 'Checkout GitHub Action'
+      uses: actions/checkout@v2
+    
+    - name: 'Login via Azure CLI'
+      uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+    
+    - uses: azure/docker-login@v1
+      with:
+        login-server: openhackbxb3pxs9acr.azurecr.io
+        username: ${{ secrets.REGISTRY_USERNAME }}
+        password: ${{ secrets.REGISTRY_PASSWORD }}
+      
+    - uses: azure/webapps-deploy@v2
+      with:
+        app-name: 'openhackbxb3pxs9userprofile'
+        slot-name: 'staging'
+        images: 'openhackbxb3pxs9acr.azurecr.io/devopsoh/api-userprofile:${{ github.sha }}'
+    
+    - name: Azure logout
+      run: |
+        az logout
