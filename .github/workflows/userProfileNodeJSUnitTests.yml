@@ -79,7 +79,7 @@ jobs:
       with:
         app-name: 'openhackbxb3pxs9userprofile'
         slot-name: 'staging'
-        images: 'openhackbxb3pxs9acr.azurecr.io/devopsoh/api-userprofile:${{ github.sha }}'
+        images: 'openhackbxb3pxs9acr.azurecr.io/devopsoh/api-userprofile:latest'
     
     - name: Azure logout
       run: |
