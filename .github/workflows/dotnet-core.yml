@@ -50,7 +50,7 @@ jobs:
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
         title: "API - POI - Failed .NET Test"
-        body: "The API failed to test"
+        body: "The API failed to test branch:${{ github.ref }}"
         assignees: | 
           selleny
           hraffaele
