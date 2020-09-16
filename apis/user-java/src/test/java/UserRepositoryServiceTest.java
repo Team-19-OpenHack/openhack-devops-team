@@ -18,7 +18,7 @@ import static org.mockito.Mockito.*;
 @RunWith(MockitoJUnitRunner.class)
 public class UserRepositoryServiceTest {
 
-    private static final String USER_ID = "test1DBD";
+    private static final String USER_ID = "test1";
     private static final String ID = "1234";
     private static final String FIRST_NAME = "test";
     private static final String LAST_NAME = "lastname";
