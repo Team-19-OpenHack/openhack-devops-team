@@ -5,7 +5,6 @@ name: Run User Profile Unit Tests
 
 on:
   push:
-    branches: [ master ]
     paths: ['apis/userprofile/**']
     
   pull_request:

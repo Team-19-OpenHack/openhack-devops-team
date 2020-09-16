@@ -5,7 +5,6 @@ name: User-Java API Pipeline
 
 on:
   push:
-    branches: [ master ]
     paths: ['apis/user-java/**']
     
   pull_request:
