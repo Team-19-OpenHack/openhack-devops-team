@@ -42,4 +42,4 @@ jobs:
       with:
         name: user-report
 #       working-directory: apis/userprofile/tests/
-        path: /reports/userprofile-report.xml
+        path: reports/userprofile-report.xml
