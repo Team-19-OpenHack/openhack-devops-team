@@ -15,7 +15,7 @@ defaults:
     working-directory: apis/user-java/
 
 jobs:
-  build:
+  job1:
     runs-on: ubuntu-latest
     name: Build Maven Project
 
@@ -65,3 +65,25 @@ jobs:
           selleny
           MSFTDELANEY
           JSandersMSFT
+          
+  job2:
+    needs: job1
+    if: github.ref == 'refs/heads/master'
+    
+    runs-on: ubuntu-latest
+    name: Build-Deploy Maven Project - ACR
+
+    steps:
+    - name: 'Checkout GitHub Action'
+      uses: actions/checkout@v2
+      
+    - name: 'Login to ACR'
+      uses: azure/docker-login@v1
+      with:
+       login-server: openhackbxb3pxs9acr.azurecr.io
+       username: ${{ secrets.REGISTRY_USERNAME }}
+       password: ${{ secrets.REGISTRY_PASSWORD }}
+    
+    - run: |
+        docker build . -t openhackbxb3pxs9acr.azurecr.io/devopsoh/api-user-java:${{ github.sha }}
+        docker push openhackbxb3pxs9acr.azurecr.io/devopsoh/api-user-java:${{ github.sha }}
