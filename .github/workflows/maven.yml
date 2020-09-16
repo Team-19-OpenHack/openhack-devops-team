@@ -9,7 +9,6 @@ on:
     
   pull_request:
     branches: [ master ]
-    paths: ['apis/user-java/**']
 
 defaults:
   run:    
