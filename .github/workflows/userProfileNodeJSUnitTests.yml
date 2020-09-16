@@ -4,9 +4,15 @@
 on:
   push:
     branches: [ master ]
+    paths: ['apis/userprofile/**']
     
   pull_request:
     branches: [ master ]
+    paths: ['apis/userprofile/**']
+
+defaults:
+  run:    
+    working-directory: apis/userprofile/
 
 env:
   CI: true
