@@ -31,8 +31,10 @@ jobs:
         node-version: ${{ env.NODE_VERSION }}
     - name: npm install, build, and test
       run: |
-        # Build and test the project, 
-        npm install --prefix tests
+        # Build and test the project,
+        npm prefix 
+        pwd
+        npm install
         npm run build --if-present
         npm run test --if-present
     - name: Archive results
@@ -40,6 +42,4 @@ jobs:
       with:
         name: user-profile
 #       working-directory: apis/userprofile/tests/
-        path: tests/reports/user-profile.xml
-
-  
+        path: /reports/user-profile.xml
