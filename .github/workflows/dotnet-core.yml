@@ -1,15 +1,17 @@
 name: .NET Core
-defaults:
-  run:    
-    working-directory: apis/poi/
+
 on:
   push:
     branches: [ master ]
     paths: 'apis/poi/**'
-
   pull_request:
     branches: [ master ]
     paths: 'apis/poi/**'
+    
+defaults:
+  run:    
+    working-directory: apis/poi/
+    
 jobs:
   build:
 
@@ -23,7 +25,7 @@ jobs:
         dotnet-version: 2.1
     - name: Install dependencies
       run: dotnet restore
-    - name: Build
+    - name: Poi API .Net Build
       run: dotnet build --configuration Release --no-restore
     - name: Test
       run: dotnet test --no-restore --verbosity normal
