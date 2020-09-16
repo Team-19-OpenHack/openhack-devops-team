@@ -74,7 +74,7 @@ jobs:
             
     - uses: azure/webapps-deploy@v2
       with:
-        app-name: 'openhackbxb3pxs9userjava'
+        app-name: 'openhackbxb3pxs9usertrips'
         slot-name: 'staging'
         images: 'openhackbxb3pxs9acr.azurecr.io/devopsoh/api-trips:${{ github.sha }}'
           
