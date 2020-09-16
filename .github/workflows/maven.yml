@@ -82,7 +82,7 @@ jobs:
        password: ${{ secrets.REGISTRY_PASSWORD }}
     
     - run: |
-        docker build . -t openhackbxb3pxs9acr.azurecr.io/devopsoh/api-user-java:latest -t openhackbxb3pxs9acr.azurecr.io/devopsoh/api-user-java:${{ github.run_id }}
+        docker build . -t openhackbxb3pxs9acr.azurecr.io/devopsoh/api-user-java:latest -t openhackbxb3pxs9acr.azurecr.io/devopsoh/api-user-java:${{ github.run_number }}
         docker push openhackbxb3pxs9acr.azurecr.io/devopsoh/api-user-java
         
   job3:

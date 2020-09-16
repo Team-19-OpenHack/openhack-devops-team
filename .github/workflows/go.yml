@@ -47,7 +47,7 @@ jobs:
        password: ${{ secrets.REGISTRY_PASSWORD }}
     
     - run: |
-        docker build . -t openhackbxb3pxs9acr.azurecr.io/devopsoh/api-trips:${{ github.run_id }} -t openhackbxb3pxs9acr.azurecr.io/devopsoh/api-trips:latest
+        docker build . -t openhackbxb3pxs9acr.azurecr.io/devopsoh/api-trips:${{ github.run_number }} -t openhackbxb3pxs9acr.azurecr.io/devopsoh/api-trips:latest
         docker push openhackbxb3pxs9acr.azurecr.io/devopsoh/api-trips
 
   job3:

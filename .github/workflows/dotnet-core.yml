@@ -74,7 +74,7 @@ jobs:
     
     - run: |
         cd web
-        docker build . -t openhackbxb3pxs9acr.azurecr.io/devopsoh/api-poi:${{ github.run_id }} -t openhackbxb3pxs9acr.azurecr.io/devopsoh/api-poi:latest
+        docker build . -t openhackbxb3pxs9acr.azurecr.io/devopsoh/api-poi:${{ github.run_number }} -t openhackbxb3pxs9acr.azurecr.io/devopsoh/api-poi:latest
         docker push openhackbxb3pxs9acr.azurecr.io/devopsoh/api-poi
   job3:
     needs: job2
