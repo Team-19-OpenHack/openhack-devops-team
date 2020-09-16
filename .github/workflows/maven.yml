@@ -41,8 +41,8 @@ jobs:
     - name: Build with Maven
       run: mvn -B package --file pom.xml
       
-    - name: Create Issue
-      if: ${{ success() }}
+    - name: Create Issue (Build)
+      if: ${{ failure() }}
       uses: alialaa/issue-action@v1
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
@@ -55,3 +55,15 @@ jobs:
 
     - name: Run Tests
       run: mvn test   
+
+    - name: Create Issue (Test)
+      if: ${{ failure() }}
+      uses: alialaa/issue-action@v1
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        title: "API - User-Java - Failed Maven Test"
+        body: "The API failed to test"
+        assignees: | 
+          selleny
+          MSFTDELANEY
+          JSandersMSFT

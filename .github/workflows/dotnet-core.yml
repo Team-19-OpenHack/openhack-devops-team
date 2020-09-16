@@ -3,10 +3,10 @@ name: .NET Core
 on:
   push:
     branches: [ master ]
-    paths: 'apis/poi/**'
+    paths: ['apis/poi/**']
   pull_request:
     branches: [ master ]
-    paths: 'apis/poi/**'
+    paths: ['apis/poi/**']
     
 defaults:
   run:    
@@ -27,5 +27,32 @@ jobs:
       run: dotnet restore
     - name: Poi API .Net Build
       run: dotnet build --configuration Release --no-restore
+    
+    - name: Create Issue (Build)
+      if: ${{ failure() }}
+      uses: alialaa/issue-action@v1
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        title: "API - POI - Failed .NET Build"
+        body: "The API failed to build"
+        assignees: | 
+          selleny
+          hraffaele
+          MSFTDELANEY
+          JSandersMSFT
+
     - name: Test
       run: dotnet test --no-restore --verbosity normal
+
+    - name: Create Issue (Test)
+      if: ${{ failure() }}
+      uses: alialaa/issue-action@v1
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        title: "API - POI - Failed .NET Test"
+        body: "The API failed to test"
+        assignees: | 
+          selleny
+          hraffaele
+          MSFTDELANEY
+          JSandersMSFT
