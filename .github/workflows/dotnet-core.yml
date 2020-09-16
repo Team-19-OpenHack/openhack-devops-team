@@ -74,8 +74,8 @@ jobs:
     
     - run: |
         cd web
-        docker build . -t openhackbxb3pxs9acr.azurecr.io/devopsoh/api-poi:${{ github.sha }} 
-        docker push openhackbxb3pxs9acr.azurecr.io/devopsoh/api-poi:${{ github.sha }} 
+        docker build . -t openhackbxb3pxs9acr.azurecr.io/devopsoh/api-poi:${{ github.run_id }} -t openhackbxb3pxs9acr.azurecr.io/devopsoh/api-poi:latest
+        docker push openhackbxb3pxs9acr.azurecr.io/devopsoh/api-poi
   job3:
     needs: job2
     if: github.ref == 'refs/heads/master'
@@ -102,7 +102,7 @@ jobs:
       with:
         app-name: 'openhackbxb3pxs9poi'
         slot-name: 'staging'
-        images: 'openhackbxb3pxs9acr.azurecr.io/devopsoh/api-poi:${{ github.sha }}'
+        images: 'openhackbxb3pxs9acr.azurecr.io/devopsoh/api-poi:latest'
     
     - name: Azure logout
       run: |
