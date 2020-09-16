@@ -5,7 +5,7 @@
 
 ## Build the Application
 
-## Tests - trigger1
+## Tests - trigger2
 
 ### Running the unit tests
 
