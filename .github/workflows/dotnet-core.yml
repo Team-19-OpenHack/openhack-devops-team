@@ -73,7 +73,8 @@ jobs:
        password: ${{ secrets.REGISTRY_PASSWORD }}
     
     - run: |
-        docker build . -t openhackbxb3pxs9acr.azurecr.io/devopsoh/api-poi:${{ github.sha }} -f ./web/Dockerfile
+        cd web
+        docker build . -t openhackbxb3pxs9acr.azurecr.io/devopsoh/api-poi:${{ github.sha }} 
         docker push openhackbxb3pxs9acr.azurecr.io/devopsoh/api-poi:${{ github.sha }} 
   job3:
     needs: job2
