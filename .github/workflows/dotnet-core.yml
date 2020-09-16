@@ -34,7 +34,7 @@ jobs:
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
         title: "API - POI - Failed .NET Build"
-        body: "The API failed to build"
+        body: "The API failed to build branch: ${{ github.ref }} commit ID: ${{ github.sha }}"
         assignees: | 
           selleny
           hraffaele
@@ -50,7 +50,7 @@ jobs:
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
         title: "API - POI - Failed .NET Test"
-        body: "The API failed to test branch:${{ github.ref }}"
+        body: "The API failed to test branch: ${{ github.ref }} commit ID: ${{ github.sha }}"
         assignees: | 
           selleny
           hraffaele
