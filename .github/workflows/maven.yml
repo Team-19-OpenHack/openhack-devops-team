@@ -110,7 +110,7 @@ jobs:
     - uses: azure/webapps-deploy@v2
       with:
         app-name: 'openhackbxb3pxs9userjava'
-        slot-name: 'openhackbxb3pxs9userjava-staging'
+        slot-name: 'staging'
         images: 'openhackbxb3pxs9acr.azurecr.io/devopsoh/api-user-java:${{ github.sha }}'
     
     - name: Azure logout
