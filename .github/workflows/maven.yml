@@ -40,6 +40,8 @@ jobs:
     
     - name: Build with Maven
       run: mvn -B package --file pom.xml
+      
+    - name: Create Issue
       if: ${{ success() }}
       uses: alialaa/issue-action@v1
       with:
