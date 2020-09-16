@@ -1,4 +1,4 @@
-name: Trips API Unit Test
+name: Trips API CI-CD
 
 on:
   push:
