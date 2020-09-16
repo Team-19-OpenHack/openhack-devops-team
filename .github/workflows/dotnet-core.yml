@@ -12,7 +12,7 @@ defaults:
     
 jobs:
   build:
-
+    name: DotNet Core
     runs-on: ubuntu-latest
 
     steps:

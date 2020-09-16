@@ -11,7 +11,6 @@ defaults:
     working-directory: apis/trips/
 
 jobs:
-
   build:
     name: Build Go Environment
     runs-on: ubuntu-latest
