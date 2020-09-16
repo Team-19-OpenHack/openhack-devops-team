@@ -1,4 +1,4 @@
-name: .NET Core
+name: POI API CI-CD
 
 on:
   push:
