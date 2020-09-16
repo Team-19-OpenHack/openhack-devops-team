@@ -1,7 +1,4 @@
-# This workflow will build a Java project with Maven
-# For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-maven
-
-name: User-Java CI
+name: User-Java CI-CD
 
 on:
   push:
@@ -17,7 +14,7 @@ defaults:
 jobs:
   job1:
     runs-on: ubuntu-latest
-    name: Build Maven Project
+    name: CI - Build and Test
 
     steps:
     - uses: actions/checkout@v2
@@ -71,7 +68,7 @@ jobs:
     if: github.ref == 'refs/heads/master'
     
     runs-on: ubuntu-latest
-    name: Build-Deploy Maven Project - ACR
+    name: CD - Deploy to ACR
 
     steps:
     - name: 'Checkout GitHub Action'
@@ -87,3 +84,35 @@ jobs:
     - run: |
         docker build . -t openhackbxb3pxs9acr.azurecr.io/devopsoh/api-user-java:${{ github.sha }}
         docker push openhackbxb3pxs9acr.azurecr.io/devopsoh/api-user-java:${{ github.sha }}
+        
+  job3:
+    needs: job2
+    if: github.ref == 'refs/heads/master'
+    
+    runs-on: ubuntu-latest
+    name: CD - Deploy to App Service Slot (Staging)
+    
+    steps:
+    - name: 'Checkout GitHub Action'
+      uses: actions/checkout@v2
+    
+    - name: 'Login via Azure CLI'
+      uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+    
+    - uses: azure/docker-login@v1
+      with:
+        login-server: openhackbxb3pxs9acr.azurecr.io
+        username: ${{ secrets.REGISTRY_USERNAME }}
+        password: ${{ secrets.REGISTRY_PASSWORD }}
+      
+    - uses: azure/webapps-container-deploy@v1
+      with:
+        app-name: 'openhackbxb3pxs9userjava'
+        slot-name: 'openhackbxb3pxs9userjava-staging'
+        images: 'openhackbxb3pxs9acr.azurecr.io/devopsoh/api-user-java:${{ github.sha }}'
+    
+    - name: Azure logout
+      run: |
+        az logout
