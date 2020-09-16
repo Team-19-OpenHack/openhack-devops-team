@@ -3,10 +3,10 @@ name: Trips API Unit Test
 on:
   push:
     branches: [ master ]
-    paths: 'apis/trips/**'
+    paths: ['apis/trips/**']
   pull_request:
     branches: [ master ]
-    paths: 'apis/trips/**'
+    paths: ['apis/trips/**']
 
 defaults:
   run:    
