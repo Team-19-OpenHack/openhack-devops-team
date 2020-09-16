@@ -42,4 +42,4 @@ jobs:
       with:
         name: user-report
 #       working-directory: apis/userprofile/tests/
-        path: ~/reports/userprofile-report.xml
+        path: ~/home/runner/work/openhack-devops-team/openhack-devops-team/apis/userprofile/reports/userprofile-report.xml
