@@ -32,14 +32,6 @@ jobs:
     - name: npm install, build, and test
       run: |
         # Build and test the project,
-        npm prefix 
-        pwd
         npm install
         npm run build --if-present
         npm run test --if-present
-    - name: Archive results
-      uses: actions/upload-artifact@v2
-      with:
-        name: user-report
-#       working-directory: apis/userprofile/tests/
-        path: ~/home/runner/work/openhack-devops-team/openhack-devops-team/apis/userprofile/reports/userprofile-report.xml
