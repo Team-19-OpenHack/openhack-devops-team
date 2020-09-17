@@ -105,9 +105,34 @@ jobs:
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-    - name: Azure Swap Slot
+    - name: 'Verify Staging Heath Service (cURL/Axios) - Call API'
+      uses: indiesdev/curl@v1
+      id: healthcheckapistaging
+      with:
+        url: 'https://openhackbxb3pxs9userjava-staging.azurewebsites.net/api/healthcheck/user-java'
+        method: 'GET'
+        accept: 200
+        body: '{ }'
+        timeout: 3000ms
+
+    - name: 'Verify Staging Heath Service (cURL/Axios) - Process Response (Healthy)'
+      if: ${{ fromJson(steps.healthcheckapistaging.outputs.response).data.status == 'healthy' }}
       run: |
         az webapp deployment slot swap  -g openhackbxb3pxs9rg -n openhackbxb3pxs9userprofile --slot staging --target-slot production
+
+    - name: 'Verify Staging Heath Service (cURL/Axios) - Process Response (Unhealthy)'
+      if: ${{ fromJson(steps.healthcheckapistaging.outputs.response).data.status != 'healthy' }}
+      
+      uses: alialaa/issue-action@v1
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        title: "API - USER PROFILE - Container is not healthy"
+        body: "build branch: ${{ github.ref }} commit ID: ${{ github.sha }} ${{ fromJson(steps.healthcheckapistaging.outputs.response)}}"
+        assignees: | 
+          selleny
+          hraffaele
+          MSFTDELANEY
+          JSandersMSFT   
 
     - name: Azure logout
       run: |
