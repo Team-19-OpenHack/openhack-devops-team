@@ -93,8 +93,11 @@ jobs:
     needs: job3
     if: github.ref == 'refs/heads/master'
     
-    runs-on: ubuntu-latest
     name: CD - Swap App Service Slots (Staging-Production)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
     
     steps:
     - name: 'Login via Azure CLI'
