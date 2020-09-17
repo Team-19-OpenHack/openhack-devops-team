@@ -1,0 +1,12 @@
+name: Curl Testing
+
+on: push
+
+jobs:
+  job1:
+    name: curl1
+    runs-on: ubuntu-latest
+    steps:
+      - name: run a curl script
+        run: |
+        curl https://www.google.com
