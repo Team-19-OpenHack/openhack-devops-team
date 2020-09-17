@@ -24,6 +24,5 @@ jobs:
         timeout: 3000ms
 
     - name: 'Verify Staging Heath Service (cURL/Axios) - Process Response'
-      if: ${{ steps.healthcheckapi.outputs.response.data.status == 'healthy' }}
       run: |
-        echo "TRUE"
+        echo " ${{ steps.healthcheckapi.outputs.response.data.status }}
