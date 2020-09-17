@@ -25,4 +25,4 @@ jobs:
 
     - name: 'Verify Staging Heath Service (cURL/Axios) - Process Response'
       run: |
-        echo ${{ steps.healthcheckapi.outputs.response.data.status }}
+        echo ${{ steps.healthcheckapi.outputs.response }}
