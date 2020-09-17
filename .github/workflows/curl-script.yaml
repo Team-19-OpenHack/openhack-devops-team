@@ -9,6 +9,10 @@ jobs:
     strategy:
       matrix:
         python-version: [3.8]
+    defaults:
+      run:
+        shell: bash
+ #       working-directory: scripts
 
     steps:
     - uses: actions/checkout@v2
@@ -29,7 +33,9 @@ jobs:
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: Test with curl
       run: |
-        curl https://openhackbxb3pxs9userprofile-staging.azurewebsites.net/api/healthcheck/user
+        import os
+        result = os.popen("curl https://openhackbxb3pxs9userprofile-staging.azurewebsites.net/api/healthcheck/user").read()
+        print result
 
 #    steps:
 #      - name: run a curl script
