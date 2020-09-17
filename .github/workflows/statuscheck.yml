@@ -25,5 +25,4 @@ jobs:
 
     - name: 'Verify Staging Heath Service (cURL/Axios) - Process Response'
       run: |
-        $output = '${{ steps.healthcheckapi.outputs.response }}' | ConvertFrom-Json
-        echo '${{ $output.data.status }}'
+        echo ${{ fromJson(steps.healthcheckapi.outputs.response).data.status }}'
