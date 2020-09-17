@@ -83,7 +83,8 @@ jobs:
 
     - name: Add version as environment variable
       run: |
-       az webapp config appsettings set --resource-group openhackbxb3pxs9rg --name openhackbxb3pxs9userprofile --slot staging --settings IMAGE_TAG=${{ github.run_number }}
+        az webapp config appsettings set --resource-group openhackbxb3pxs9rg --name openhackbxb3pxs9userprofile --slot staging --settings IMAGE_TAG=${{ github.run_number }}
+        az webapp config appsettings list --resource-group openhackbxb3pxs9rg --name openhackbxb3pxs9userprofile --slot staging -o table
 
     - name: Azure logout
       run: |
@@ -119,6 +120,7 @@ jobs:
       if: ${{ fromJson(steps.healthcheckapistaging.outputs.response).data.status == 'healthy' }}
       run: |
         az webapp deployment slot swap  -g openhackbxb3pxs9rg -n openhackbxb3pxs9userprofile --slot staging --target-slot production
+        az webapp config appsettings list --resource-group openhackbxb3pxs9rg --name openhackbxb3pxs9userprofile -o table
 
     - name: 'Verify Staging Heath Service (cURL/Axios) - Process Response (Unhealthy)'
       if: ${{ fromJson(steps.healthcheckapistaging.outputs.response).data.status != 'healthy' }}
@@ -153,7 +155,9 @@ jobs:
     - name: 'Verify Production Heath Service (cURL/Axios) - Process Response (Unhealthy)'
       if: ${{ fromJson(steps.healthcheckapi.outputs.response).data.status != 'healthy' }}
       run: |
+        echo 'Production is unhealthy, reverting to previous image'
         az webapp deployment slot swap  -g openhackbxb3pxs9rg -n openhackbxb3pxs9userprofile --slot staging --target-slot production
+        az webapp config appsettings list --resource-group openhackbxb3pxs9rg --name openhackbxb3pxs9userprofile -o table
 
     - name: Azure logout
       run: |
