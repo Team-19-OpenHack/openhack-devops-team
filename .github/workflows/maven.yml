@@ -132,5 +132,8 @@ jobs:
         method: 'GET'
         accept: 200
         body: '{ }'
+        
     - name: 'Verify Staging Heath Service (cURL/Axios) - Process Response'
-      run: echo ${{ steps.healthcheckapi.outputs.response }}
+      if: ${{ steps.healthcheckapi.outputs.response.data.status == 'healthy' }}
+      run: |
+        echo "TRUE"
