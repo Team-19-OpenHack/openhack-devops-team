@@ -2,11 +2,7 @@ name: Test Health Status Check
 
 on:
   schedule:
-    - cron:  '* * * * *'
-
-defaults:
-  run:    
-    working-directory: apis/user-java/
+    - cron:  "*/2 * * * *"
 
 jobs:
   job4:
