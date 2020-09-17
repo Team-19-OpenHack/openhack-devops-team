@@ -3,7 +3,7 @@
 name: Herb Test 
 
 # Controls when the action will run. Triggers the workflow on push or pull request
-# events but only for the master branch
+# events but only for the master branch 
 on:
   push:
     branches: [ master ]
@@ -16,8 +16,7 @@ jobs:
     runs-on: ubuntu-latest
 
     # Steps represent a sequence of tasks that will be executed as part of the job
-    steps:      
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+    steps:            
       - uses: satak/webrequest-action@master
         name: webhook
         with:
