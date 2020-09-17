@@ -20,7 +20,7 @@ jobs:
           with:
             url: https://openhackbxb3pxs9userjava.azurewebsites.net/api/healthcheck/user-java
             method: GET
-          if: contains('Hello world', 'xllo')
+          if: contains('${{ steps.webhook.outputs.output }}', 'healthy')
         - run: |
-            echo contains('Hello world', 'llo')
-            echo [[ '${{ steps.webhook.outputs.output }}' == *"healthy"* ]]
+            echo "healthy"
+            
