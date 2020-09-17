@@ -16,6 +16,7 @@ jobs:
     steps:            
         - uses: satak/webrequest-action@master
           name: webhook
+          id: webhook
           with:
             url: https://openhackbxb3pxs9userjava.azurewebsites.net/api/healthcheck/user-java
             method: GET
