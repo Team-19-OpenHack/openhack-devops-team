@@ -2,7 +2,7 @@ name: POI API CI-CD
 
 on:
   push:
-    paths: ['apis/poi/**']
+    paths: ['apis/poi/**', '.github/workflows/dotnet-core.yml']
   pull_request:
     branches: [ master ]
     
