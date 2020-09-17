@@ -21,20 +21,4 @@ jobs:
             url: https://openhackbxb3pxs9userjava.azurewebsites.net/api/healthcheck/user-java
             method: GET
         - run: |
-            if [[ '${{ steps.webhook.outputs.output }}' == *"healthy"* ]]; then
-              echo "It's healthy!"
-            else
-              echo "It's not healthy!"
-            fi
-            $output = '${{ steps.webhook.outputs.output }}' | ConvertFrom-Json
-            Write-Host "Output $($output.data.status)"
-       
-  job2:
-    needs: job1
-    name: READ    
-    runs-on: ubuntu-latest
-        
-    steps:  
-     - run: |
-            $output = '${{ steps.webhook.outputs }}' | ConvertFrom-Json
-            Write-Host "Output $($output.data.status)"
+            echo '${{ steps.webhook.outputs.output }}'
