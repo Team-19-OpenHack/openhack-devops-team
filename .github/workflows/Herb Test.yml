@@ -25,4 +25,4 @@ jobs:
       - run: |
           $status = '{  "output": {    "url": "<str url>",    "method": "<str method>",    "payload": {},    "time": "<str time>",    "statusCode": "<int statusCode>",    "data": "object/array data from API"  }}'
           $output = '$status' | ConvertFrom-Json
-          Write-Host "Time from output $($output.time) statusCode $($output.statusCode) data $($output.data)"
+          
