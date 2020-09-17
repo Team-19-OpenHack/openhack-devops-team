@@ -9,21 +9,41 @@ on:
 
 jobs:
   job4:
+    if: github.ref == 'refs/heads/master'
+    
+    name: CD - Swap App Service Slots (Staging-Production)
     runs-on: ubuntu-latest
-    name: CD - Verify Health (Staging)
-
+    defaults:
+      run:
+        shell: bash
+    
     steps:
-    - name: 'Verify Staging Heath Service (cURL/Axios) - Call API'
+    - name: 'Login via Azure CLI'
+      uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+    - name: 'Verify Production Heath Service (cURL/Axios) - Call API'
       uses: indiesdev/curl@v1
       id: healthcheckapi
       with:
-        url: 'https://openhackbxb3pxs9userjava-staging.azurewebsites.net/api/healthcheck/user-java'
+        url: 'https://openhackbxb3pxs9userjava.azurewebsites.net/api/healthcheck/user-java'
         method: 'GET'
         accept: 200
         body: '{ }'
         timeout: 3000ms
 
-    - name: 'Verify Staging Heath Service (cURL/Axios) - Process Response'
-      if: ${{ fromJson(steps.healthcheckapi.outputs.response).data.status == 'healthy' }}
+    - name: 'Verify Production Heath Service (cURL/Axios) - Process Response (Healthy)'
+      if: ${{ fromJson(steps.healthcheckapistaging.outputs.response).data.status == 'healthy' }}
       run: |
-        echo 'HEALTHY'
+        echo 'Production is healthy'
+        az webapp config appsettings list --resource-group openhackbxb3pxs9rg --name openhackbxb3pxs9userprofile -o table
+
+    - name: 'Verify Production Heath Service (cURL/Axios) - Process Response (Unhealthy)'
+      if: ${{ fromJson(steps.healthcheckapi.outputs.response).data.status != 'healthy' }}
+      run: |
+        az webapp deployment slot swap  -g openhackbxb3pxs9rg -n openhackbxb3pxs9userprofile --slot staging --target-slot production
+
+    - name: Azure logout
+      run: |
+        az logout
