@@ -2,4 +2,4 @@
 
 import os
 result = os.popen("curl https://openhackbxb3pxs9userprofile-staging.azurewebsites.net/api/healthcheck/user").read()
-print result
+print(result)
