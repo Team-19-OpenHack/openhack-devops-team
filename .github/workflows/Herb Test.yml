@@ -19,20 +19,13 @@ jobs:
           with:
             url: https://openhackbxb3pxs9userjava.azurewebsites.net/api/healthcheck/user-java
             method: GET
-        - run: |
-            $output = '${{ steps.webhook.outputs.output }}' | ConvertFrom-Json
-            Write-Host "Output $($output.data.status)"
-
-
+       
   job2:
     needs: job1
     name: READ    
     runs-on: ubuntu-latest
         
     steps:  
-    - run: |
-        cd web
-        docker build . -t openhackbxb3pxs9acr.azurecr.io/devopsoh/api-poi:${{ github.run_number }} -t openhackbxb3pxs9acr.azurecr.io/devopsoh/api-poi:latest
-        docker push openhackbxb3pxs9acr.azurecr.io/devopsoh/api-poi
-
-
+     - run: |
+            $output = '${{ steps.webhook.outputs.output }}' | ConvertFrom-Json
+            Write-Host "Output $($output.data.status)"
