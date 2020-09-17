@@ -20,8 +20,9 @@ jobs:
           with:
             url: https://openhackbxb3pxs9userjava.azurewebsites.net/api/healthcheck/user-java
             method: GET
-            if: ${{ fromJson(steps.webhook.outputs.output).data.statuse == 'healthy' }}
+            if: ${{ fromJson(steps.webhook.outputs.output).data.status == 'healthy' }}
             run: echo "healthy"
+            
         - run: |
             echo "${{fromJson(steps.webhook.outputs.output).data.status}}"  
           
