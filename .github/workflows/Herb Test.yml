@@ -27,5 +27,5 @@ jobs:
         
     steps:  
      - run: |
-            $output = '${{ steps.webhook.outputs.output }}' | ConvertFrom-Json
+            $output = '${{ steps.webhook.outputs }}' | ConvertFrom-Json
             Write-Host "Output $($output.data.status)"
