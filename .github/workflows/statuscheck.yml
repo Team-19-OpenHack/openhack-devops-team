@@ -1,0 +1,30 @@
+name: Test Health Status Check
+
+on:
+  schedule:
+    - cron:  '*/15 * * * *'
+
+defaults:
+  run:    
+    working-directory: apis/user-java/
+
+jobs:
+  job4:
+    runs-on: ubuntu-latest
+    name: CD - Verify Health (Staging)
+
+    steps:
+    - name: 'Verify Staging Heath Service (cURL/Axios) - Call API'
+      uses: indiesdev/curl@v1
+      id: healthcheckapi
+      with:
+        url: 'https://openhackbxb3pxs9userjava-staging.azurewebsites.net/api/healthcheck/user-java'
+        method: 'GET'
+        accept: 200
+        body: '{ }'
+        timeout: 3000ms
+
+    - name: 'Verify Staging Heath Service (cURL/Axios) - Process Response'
+      if: ${{ steps.healthcheckapi.outputs.response.data.status == 'healthy' }}
+      run: |
+        echo "TRUE"

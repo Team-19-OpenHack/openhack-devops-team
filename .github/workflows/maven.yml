@@ -132,7 +132,8 @@ jobs:
         method: 'GET'
         accept: 200
         body: '{ }'
-        
+        timeout: 10000ms
+
     - name: 'Verify Staging Heath Service (cURL/Axios) - Process Response'
       if: ${{ steps.healthcheckapi.outputs.response.data.status == 'healthy' }}
       run: |
