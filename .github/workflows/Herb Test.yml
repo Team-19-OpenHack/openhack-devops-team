@@ -23,4 +23,7 @@ jobs:
           if: contains('${{ steps.webhook.outputs.output }}', 'healthyX')
         - run: |
             echo "healthy"
+          if: contains('${{ steps.webhook.outputs.output }}', 'healthyX')
+        - run: |
+            echo "not healthy"
             
