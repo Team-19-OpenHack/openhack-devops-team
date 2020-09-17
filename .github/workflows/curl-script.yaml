@@ -9,5 +9,4 @@ jobs:
     steps:
       - name: run a curl script
         run: |
-        curl https://www.google.com
-
+          curl https://www.google.com
