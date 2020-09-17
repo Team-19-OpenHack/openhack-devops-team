@@ -19,7 +19,8 @@ jobs:
           id: webhook
           with:
             url: https://openhackbxb3pxs9userjava.azurewebsites.net/api/healthcheck/user-java
-            method: GET                        
-        - run: |
-            echo "${{fromJson(steps.webhook.outputs.output).data.status == 'unhealthy'}}"  
+            method: GET              
+            if: "${{fromJson(steps.webhook.outputs.output).data.status == 'unhealthy'}}"
+            run: "healthy"
+      
           
