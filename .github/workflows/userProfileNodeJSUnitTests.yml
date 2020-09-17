@@ -88,3 +88,24 @@ jobs:
     - name: Azure logout
       run: |
         az logout
+
+  job4:
+    needs: job3
+    if: github.ref == 'refs/heads/master'
+    
+    runs-on: ubuntu-latest
+    name: CD - Swap App Service Slots (Staging-Production)
+    
+    steps:
+    - name: 'Login via Azure CLI'
+      uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+    - name: Azure Swap Slot
+      run: |
+        az webapp deployment slot swap  -g openhackbxb3pxs9rg -n openhackbxb3pxs9userprofile --slot staging --target-slot production
+
+    - name: Azure logout
+      run: |
+        az logout
