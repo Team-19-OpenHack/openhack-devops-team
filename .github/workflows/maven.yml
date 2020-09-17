@@ -116,3 +116,21 @@ jobs:
     - name: Azure logout
       run: |
         az logout
+        
+  job4:
+    needs: job3
+
+    runs-on: ubuntu-latest
+    name: CD - Verify Health (Staging)
+
+    steps:
+    - name: 'Verify Staging Heath Service (cURL/Axios) - Call API'
+      uses: indiesdev/curl@v1
+      id: healthcheckapi
+      with:
+        url: 'https://openhackbxb3pxs9userjava-staging.azurewebsites.net/api/healthcheck/user-java'
+        method: 'GET'
+        accept: 200
+        body: '{ }'
+    - name: 'Verify Staging Heath Service (cURL/Axios) - Process Response'
+      run: echo ${{ steps.healthcheckapi.outputs.response }}
