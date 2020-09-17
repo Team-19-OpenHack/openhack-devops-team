@@ -1,6 +1,8 @@
 name: Test Health Status Check
 
 on:
+  push:
+    branches: ['master']    
   schedule:
     - cron:  "*/2 * * * *"
 
