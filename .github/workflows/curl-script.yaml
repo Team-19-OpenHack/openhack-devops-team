@@ -35,6 +35,24 @@ jobs:
       run: |
         python test_script.py
 
+  job2:
+    needs: job1
+    if: github.ref == 'refs/heads/master'
+    
+    runs-on: ubuntu-latest
+    name: Swap deployment slot
+    
+    steps:    
+    - name: 'Login via Azure CLI'
+      uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+    - name: Azure Swap Slot
+      run: |
+        az logout
+        az webapp deployment slot swap  -g openhackbxb3pxs9rg -n openhackbxb3pxs9userprofile --slot staging --target-slot production
+
 #    steps:
 #      - name: run a curl script
 #        run: |
