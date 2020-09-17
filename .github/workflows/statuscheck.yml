@@ -2,7 +2,8 @@ name: Test Health Status Check
 
 on:
   push:
-    branches: ['master']    
+    branches: ['master']
+    paths: ['apis/user-java/**']    
   schedule:
     - cron:  "*/2 * * * *"
 
