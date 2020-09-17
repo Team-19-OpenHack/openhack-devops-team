@@ -22,10 +22,4 @@ jobs:
             method: GET
         - run: |
             echo "${{fromJson(steps.webhook.outputs.output).data.status}}"  
-          if: "contains(steps.webhook.outputs.output, 'healthy')"
-        - run: |
-            echo "healthy"
-          if: "!contains(steps.webhook.outputs.output, 'healthy')"
-        - run: |
-            echo "not healthy"
-            
+          
