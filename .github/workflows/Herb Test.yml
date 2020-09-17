@@ -16,10 +16,10 @@ jobs:
     runs-on: ubuntu-latest
 
     # Steps represent a sequence of tasks that will be executed as part of the job
-    steps:
-      - name: webhook
+    steps:      
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: satak/webrequest-action@master
+        name: webhook
         with:
           url: https://openhackbxb3pxs9userjava.azurewebsites.net/api/healthcheck/user-java
           method: GET
