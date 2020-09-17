@@ -52,6 +52,11 @@ jobs:
       run: |
         az webapp deployment slot swap  -g openhackbxb3pxs9rg -n openhackbxb3pxs9userprofile --slot staging --target-slot production
 
+    - name: Log out of Azure
+      run: |
+        az logout
+
+
 #    steps:
 #      - name: run a curl script
 #        run: |
