@@ -8,21 +8,31 @@ on:
   push:
     branches: [ master ]
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
-  build:
-    # The type of runner that the job will run on
+  job1:
+    name: GET
     runs-on: ubuntu-latest
 
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:            
-      - uses: satak/webrequest-action@master
-        name: webhook
-        with:
-          url: https://openhackbxb3pxs9userjava.azurewebsites.net/api/healthcheck/user-java
-          method: GET
-      - run: |
-          $output = '${{ steps.webhook.outputs.output }}' | ConvertFrom-Json
-          Write-Host "Output $($output.data.status)"
-          
+        - uses: satak/webrequest-action@master
+          name: webhook
+          with:
+            url: https://openhackbxb3pxs9userjava.azurewebsites.net/api/healthcheck/user-java
+            method: GET
+        - run: |
+            $output = '${{ steps.webhook.outputs.output }}' | ConvertFrom-Json
+            Write-Host "Output $($output.data.status)"
+
+
+  job2:
+    needs: job1
+    name: READ    
+    runs-on: ubuntu-latest
+        
+    steps:  
+    - run: |
+        cd web
+        docker build . -t openhackbxb3pxs9acr.azurecr.io/devopsoh/api-poi:${{ github.run_number }} -t openhackbxb3pxs9acr.azurecr.io/devopsoh/api-poi:latest
+        docker push openhackbxb3pxs9acr.azurecr.io/devopsoh/api-poi
+
+
