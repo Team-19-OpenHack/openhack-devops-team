@@ -23,5 +23,6 @@ jobs:
           url: https://openhackbxb3pxs9userjava.azurewebsites.net/api/healthcheck/user-java
           method: GET
       - run: |
-          $output = '${{ steps.webhook.outputs.output }}' | ConvertFrom-Json
+          $status = '{  "output": {    "url": "<str url>",    "method": "<str method>",    "payload": {},    "time": "<str time>",    "statusCode": "<int statusCode>",    "data": "object/array data from API"  }}'
+          $output = '$status' | ConvertFrom-Json
           Write-Host "Time from output $($output.time) statusCode $($output.statusCode) data $($output.data)"
