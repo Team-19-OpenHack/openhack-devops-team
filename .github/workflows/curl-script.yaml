@@ -23,6 +23,7 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
+        python import os
         pip install flake8 pytest
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
     - name: Lint with flake8
@@ -33,7 +34,7 @@ jobs:
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: Test with curl
       run: |
-        import os
+        python
         result = os.popen("curl https://openhackbxb3pxs9userprofile-staging.azurewebsites.net/api/healthcheck/user").read()
         print result
 
