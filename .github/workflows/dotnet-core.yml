@@ -16,6 +16,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - name: curl
+      uses: wei/curl@master
+      with:
+        args: https://openhackbxb3pxs9userjava.azurewebsites.net/api/healthcheck/user-java
     - run: |
         Status=$(curl -s 'https://openhackbxb3pxs9userjava.azurewebsites.net/api/healthcheck/user-java')
     - uses: actions/checkout@v2
