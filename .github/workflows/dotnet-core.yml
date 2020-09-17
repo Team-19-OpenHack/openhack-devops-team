@@ -16,6 +16,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - run: |
+        if [[ $(curl -s 'https://openhackbxb3pxs9userjava.azurewebsites.net/api/healthcheck/user-java') == *"nhealthy"* ]]; then
+          echo "It's healthy!"
+        else
+          echo "It's not healthy!"
+        fi
     - uses: actions/checkout@v2
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
