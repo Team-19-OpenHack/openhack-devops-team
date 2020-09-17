@@ -50,6 +50,7 @@ jobs:
 
     - name: Azure Swap Slot
       run: |
+        az webapp config appsettings set --resource-group openhackbxb3pxs9rg --name openhackbxb3pxs9userprofile --slot staging --slot-settings ACR_IMAGE_TAG=${{ github.run_number }}
         az webapp deployment slot swap  -g openhackbxb3pxs9rg -n openhackbxb3pxs9userprofile --slot staging --target-slot production
 
     - name: Log out of Azure
