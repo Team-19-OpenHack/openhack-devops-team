@@ -80,7 +80,11 @@ jobs:
         app-name: 'openhackbxb3pxs9userprofile'
         slot-name: 'staging'
         images: 'openhackbxb3pxs9acr.azurecr.io/devopsoh/api-userprofile:latest'
-    
+
+    - name: Add version as environment variable
+      run: |
+       az webapp config appsettings set --resource-group openhackbxb3pxs9rg --name openhackbxb3pxs9userprofile --slot staging --settings IMAGE_TAG=${{ github.run_number }}
+
     - name: Azure logout
       run: |
         az logout
