@@ -2,7 +2,7 @@ name: Test Health Status Check
 
 on:
   schedule:
-    - cron:  '*/3 * * * *'
+    - cron:  '* * * * *'
 
 defaults:
   run:    
