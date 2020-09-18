@@ -4,8 +4,6 @@ on:
   push:
     branches: ['master']
     paths: ['apis/user-java/**']    
-  schedule:
-    - cron:  "*/2 * * * *"
 
 jobs:
   job4:
